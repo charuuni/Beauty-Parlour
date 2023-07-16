@@ -1,0 +1,153 @@
+{% extends 'adminindex.html' %}
+
+{% block content %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<div class="container">
+  {% for i in data %}
+  <form action="{% url 'updates' id=i.id %}" method="post" style="text-align:center;" enctype="multipart/form-data">
+      {% csrf_token %}
+<div class="row">
+    <div class="col-lg-12 mb-4">
+      <!-- Simple Tables -->
+      <div class="card">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6 class="m-0 font-weight-bold text-primary">Services</h6>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <label for="exampleFormControlInput1" style="text-align:center;"><h2>Service name</h2></label>
+          <input type="text" name="servicename" value="{{i.servicename}}"class="form-control" id="exampleFormControlInput1" placeholder="text">
+          <label for="exampleFormControlInput1">Select Branch</label>
+
+          <select name="branchname"id="mySelect">
+            {% for i in branch %}
+            <option value="{{i.branchname}}">{{i.branchname}} </option>
+            {% endfor %}
+            
+          </select>
+              
+        <br>
+            
+            <label for="exampleFormControlInput1">price</label>
+          <input type="text" name="price" value="{{i.price}}"><br>
+        <div class="form-group">
+          <input type="file" name="image">
+   </div>
+
+  
+   <div class="form-group">
+   <select name="service_name"id="service-name">
+    
+    <option value="{{i.service_name}}">{{i.service_name}} </option>
+    {% for i in service %}
+    <option value="{{i.service_name}}">{{i.service_name}} </option>
+    {% endfor %}
+    
+    </select><br>
+   
+    <select name="service_type"id="service-type">
+      <option value="{{i.service_type}}">{{i.service_type}} </option>
+      </select>
+   </div>
+  <br>
+  <button style="text-align:center;">Submit</button>    
+</form> 
+{% endfor %}
+</div>
+<script>
+  $(document).ready(function() {
+      $('#service-name').change(function() {
+          var selectedService = $(this).val();
+          var serviceTypeDropdown = $('#service-type');
+          serviceTypeDropdown.empty();
+
+          if (selectedService === 'haircut') {
+              var option = $('<option>', {value: 'layer-cut', text: 'Layer Cut'});
+              serviceTypeDropdown.append(option);
+
+              option = $('<option>', {value: 'u/v-cut', text: 'U/V Cut'});
+              serviceTypeDropdown.append(option);
+
+              option = $('<option>', {value: 'normal-cut', text: 'Normal Cut'});
+              serviceTypeDropdown.append(option);
+          }
+          else if (selectedService === 'wax') {
+              var option = $('<option>', {value: 'underarms', text: 'Underarms'});
+              serviceTypeDropdown.append(option);
+
+              option = $('<option>', {value: 'legs', text: 'Legs'});
+              serviceTypeDropdown.append(option);
+
+              option = $('<option>', {value: 'hands', text: 'Hands'});
+              serviceTypeDropdown.append(option);
+
+              option = $('<option>', {value: 'complete-body', text: 'Complete Body'});
+              serviceTypeDropdown.append(option);
+          }
+          else if (selectedService === 'facial') {
+              var option = $('<option>', {value: 'clean up', text: 'Clean up'});
+              serviceTypeDropdown.append(option);
+
+              option = $('<option>', {value: 'Golden', text: 'Golden'});
+              serviceTypeDropdown.append(option);
+
+              option = $('<option>', {value: 'platinum', text: 'Platinum'});
+              serviceTypeDropdown.append(option);
+
+              option = $('<option>', {value: 'Fruit', text: 'Fruit'});
+              serviceTypeDropdown.append(option);
+          }
+          
+          else if (selectedService === 'Make Up') {
+              var option = $('<option>', {value: 'make up', text: 'No options'});
+              serviceTypeDropdown.append(option);
+
+              
+          }
+         
+          else if (selectedService === 'manicure') {
+              var option = $('<option>', {value: 'manicure', text: 'No options'});
+              serviceTypeDropdown.append(option);
+          }
+
+          else if (selectedService === 'pedicure') {
+              var option = $('<option>', {value: 'pedicure', text: 'No option'});
+              serviceTypeDropdown.append(option);
+          }
+                              
+          else if (selectedService === 'Hair') {
+              var option = $('<option>', {value: 'smooth', text: 'Smoothening'});
+              serviceTypeDropdown.append(option);
+
+              option = $('<option>', {value: 'straight', text: 'Straightening'});
+              serviceTypeDropdown.append(option);
+
+              option = $('<option>', {value: 'keratin', text: 'Keratin'});
+              serviceTypeDropdown.append(option);
+
+              option = $('<option>', {value: 'Blow dry', text: 'Blow Dry'});
+              serviceTypeDropdown.append(option);
+          }
+          else if (selectedService === 'spa') {
+              var option = $('<option>', {value: 'hair', text: 'Hair spa'});
+              serviceTypeDropdown.append(option);
+      
+              option = $('<option>', {value: 'Body', text: 'Body Spa'});
+              serviceTypeDropdown.append(option);
+          }
+
+          
+      });
+  });
+</script>
+        </thead>
+            <tbody>
+              
+        </div>
+       
+      </div>
+    </div>
+  </div>
+{% endblock %}

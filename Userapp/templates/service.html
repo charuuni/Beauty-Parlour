@@ -1,0 +1,60 @@
+  {% extends 'home.html' %}
+
+  {% block content %}
+  
+      
+     
+      <div class="card-deck">
+        <div class="card">
+          
+          <div class="container-xxl py-5">
+            <div class="container">
+                <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                    <br><br><br>
+                    <h1 class="display-5 mb-5">Our Services</h1>
+                </div>
+               
+                <div class="owl-carousel project-carousel wow fadeInUp" data-wow-delay="0.3s">
+                    {% for i in serv %}
+                    <div class="project-item pe-5 pb-5">
+                       
+                        <div class="project-img mb-3">
+                         
+                          <img class="img-fluid rounded"style="width: 400px; height: 300px;" src="{{ i.image.url }}" alt="Image">
+                           
+                           
+                            <a href="{% url 'detail' service_name=i.service_name %}"></a> <h5 class="mb-0">{{i.servicename}}</h5></a>
+                        </div>
+                       
+                        
+                      
+                    </div>
+                   
+                    
+                    {% endfor %}  
+                        
+                </div>
+               
+            </div>
+        </div>
+
+
+
+
+            
+       
+    
+  {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+

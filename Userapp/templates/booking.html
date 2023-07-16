@@ -1,0 +1,146 @@
+{% extends 'home.html' %}
+
+{% block content %}
+<style>
+    /* CSS styles */
+    .container {
+        padding-top: 100px;
+    }
+
+    .card {
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h4 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    .table-responsive {
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    input[type="date"],
+    input[type="time"] {
+        padding: 5px;
+        width: 200px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+    }
+
+    button[type="submit"] {
+        padding: 10px 20px;
+        background-color: #337ab7;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .messages {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .messages p {
+        margin: 5px;
+        color: #555;
+        font-size: 16px;
+    }
+</style>
+
+<div class="container">
+    <form action="{% url 'bookingdata' %}" method="post" class="user" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row pt-5">
+            <div class="col-lg-12 mb-4">
+                <div class="card">
+                    <h4>Booking Summary</h4>
+                    <div class="table-responsive">
+                        <table class="table align-items-center table-flush">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Service Name</th>
+                                    <th>Service Type</th>
+                                    <th>Branch Name</th>
+                                    <th>Image</th>
+                                    <th>Price</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in key %}
+                                <tr>
+                                    <td>{{ item.serviceid.servicename }}</td>
+                                    <td>{{ item.serviceid.service_type }}</td>
+                                    <td>{{ item.serviceid.branchname }}</td>
+                                    <td>
+                                        <img src="{{ item.serviceid.image.url }}" alt="Service Image"
+                                            style="border-radius: 80%; width: 130px; height: 130px;">
+                                    </td>
+                                    <td>{{ item.serviceid.price }}</td>
+                                    <td><a href="{% url 'cartdelete' item.id %}">Delete</a></td>
+                                </tr>
+                                {% endfor %}
+                                <tr>
+                                    <td colspan="3">Total:</td>
+                                    <td>{{ total_price }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bg-white border rounded p-4 p-sm-5 wow fadeInUp" data-wow-delay="0.5s">
+                        <a href="{% url 'home' %}">Continue Shopping</a>
+                        <div class="form-group">
+                            <label for="date">Date:</label>
+                            <input type="date" id="date" name="date" required>
+                           
+                            <label for="time">Time:</label>
+                            <input type="time" id="time" name="time" required>
+                        </div>
+                        <div style="text-align: center;">
+                            <button type="submit">Confirm Booking</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

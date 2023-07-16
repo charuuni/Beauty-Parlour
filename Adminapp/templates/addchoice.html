@@ -1,0 +1,84 @@
+{% extends 'adminindex.html' %}
+
+{% block content %}
+<div class="container-fluid" id="container-wrapper">
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Add Branches</h1>
+    
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+        
+      <!-- Form Basic -->
+      <div class="card mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6 class="m-0 font-weight-bold text-primary"></h6>
+        </div>
+        <div class="card-body">
+          <form action="{% url 'servicedata' %}" method="post"  enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="exampleInputEmail1">Service name</label>
+              <input type="text"  name="service_name" class="form-control" id="exampleFormControlInput1" aria-describedby="name"
+                placeholder="Enter name">
+             
+            </div>
+            <select id="service-name" name="service_name">
+                <option value="">Select Service Name</option>
+                
+                    <option value="service.id1">Hair cut</option>
+               
+                    <option value="service.id2">Waxing</option>
+                    <option value="service.id3">Threading</option>
+                    <option value="service.id4">Manicure</option>
+                    <option value="service.id5">Pedicure</option>
+                    <option value="service.id6">Facial</option>
+                    <option value="service.id7">Clean up</option>
+                    <option value="service.id8">Hair treatment</option>
+        
+            </select>
+            
+            <select id="service-type"  name="service_type">
+                <option value="">Select Service Type</option>
+                <option value="service.id1">Normal cut</option>
+                <option value="service.id1">Layer cut</option>
+                <option value="service.id1">U/V cut</option>
+                <option value="service.id1">Step cut</option>
+                <option value="service.id2">Legs</option>
+                <option value="service.id2">Hands</option>
+                <option value="service.id2">Underarms</option>
+                <option value="service.id2">Complete body</option>
+                <option value="service.id3">Eye brows</option>
+                <option value="service.id3">Face</option>
+                <option value="service.id6">Normal</option>
+                <option value="service.id6">Fruit</option>
+                <option value="service.id6">Golden</option>
+                <option value="service.id6">Platinum</option>
+                <option value="service.id7">Normal</option>
+                <option value="service.id7">Fruit</option>
+                <option value="service.id7">Charcol</option>
+                <option value="service.id8">Hair spa</option>  
+                <option value="service.id8">Straightening(p)</option>  
+                <option value="service.id8">Smoothening(p)</option>
+                <option value="service.id8">Blow dry(p)</option>                     
+
+            </select>
+            <div class="form-group">
+              <div class="form-group">
+                <label for="exampleInputPassword1">Upload Image</label>
+              </div>
+              
+              <div class="custom-file">
+                
+                <input type="file" name="image" class="custom-file-input" id="customFile">
+                <label class="custom-file-label" for="customFile">Choose file</label>
+              </div>
+                
+            </div>
+           
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+{% endblock %}

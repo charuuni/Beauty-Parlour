@@ -1,0 +1,55 @@
+ {% extends 'home.html' %}
+
+  {% block content %}
+  
+    <style>
+      .img-cap{position: absolute;
+                bottom: -20%;
+                width: 100%;
+                opacity: 0;
+                visibility: hidden;
+                @include transition(.4s);}
+                span{
+                    color: #fff;
+                    background: #f81f1f;
+                    padding: 20px 0;
+                    display: block;
+                    cursor: pointer;}
+                    .single-popular-items:hover .popular-img .img-cap {
+    bottom: 0;
+    opacity: 1;
+    visibility: visible;
+   }
+    </style>  
+     
+<div class="card-deck">
+  <div class="card">
+          
+          
+
+
+  <div class="container-facts my-5 py-5">
+    <div class="container py-5">
+        <div class="row g-5">
+          {% for i in details %}
+            <div class="col-sm-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.1s">
+               
+                <h4>{{i.servicename}}</h4>
+                <div class="project-img mb-3">
+                 <img class="img-fluid rounded"style="width: 400px; height: 300px;" src="{{ i.image.url }}" alt="Image">
+                  
+                 <h4 class="mb-0">{{i.service_type}}</h4></a>
+                 <h7 class="card-title"><i>{{i.price}}</i></h7>
+                 <a href="{% url 'cartdata' id=i.id %}"><span class="fs-5 text-white">Add to Cart</span></a>
+                 <hr class="bg-white w-25 mx-auto mb-0">
+                </div>
+            </div>
+            {% endfor %} 
+            <h7 class="card-title"><i>Total Price: {{ total_price }}</i></h7>
+        </div>
+    </div>
+  </div>  
+</div>
+</div>
+
+  {% endblock %}

@@ -1,0 +1,187 @@
+{% extends 'adminindex.html' %}
+
+{% block content %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<div class="container-fluid" id="container-wrapper">
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Add Services</h1>
+    
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+     
+    
+      <!-- Form Basic -->
+      <div class="card mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6 class="m-0 font-weight-bold text-primary"></h6>
+        </div>
+        <div class="card-body">
+          <form action="{% url 'servicedata' %}" method="post"  enctype="multipart/form-data">
+            {% csrf_token %}
+        
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Service Name</label>
+              <input type="text"  name="servicename" class="form-control" id="exampleFormControlInput1" aria-describedby="name"
+                placeholder="Name">
+             
+            </div>
+           
+            <div class="form-group">
+             
+              <label for="exampleFormControlInput1">Select Branch</label>
+              
+            <select name="branchname"id="mySelect">
+              {% for i in data %}
+              <option value="{{i.branchname}}">{{i.branchname}} </option>
+              {% endfor %}
+              
+              </select>
+             
+             
+              <div class="form-group">
+                <label for="exampleInputEmail1">Price</label>
+                <input type="text"  name="price" class="form-control" id="exampleFormControlInput1" aria-describedby="name"
+                  placeholder="price">
+                  
+                  
+              </div>   
+              
+            </div>
+            <div class="form-group">
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Upload Image</label>
+              </div>
+              
+              <div class="custom-file">
+                
+                <input type="file" name="image" class="custom-file-input" id="customFile">
+                <label class="custom-file-label" for="customFile">Choose file</label>
+              </div>
+
+
+
+             
+  </div>
+
+        
+            <div class="form-group">
+               
+          
+                
+                   
+                    <select id="service-name" name="service_name">
+                        <option value="">Select a service</option>
+                        <option value="haircut">Haircut</option>
+                        <option value="wax">Wax</option>
+                        <option value="facial">Facial</option>
+                        <option value="make up">Make Up</option>
+                        <option value="manicure">Manicure</option>
+                        <option value="pedicure">Pedicure</option>
+                        <option value="Hair">Hair Treatment</option>
+                        <option value="spa">Spa</option>
+                    </select>
+                    
+                    <br>
+                    <select id="service-type" name="service_type">
+                       <option value="">Select service type</option>
+                    </select>
+                    <script>
+                        $(document).ready(function() {
+                            $('#service-name').change(function() {
+                                var selectedService = $(this).val();
+                                var serviceTypeDropdown = $('#service-type');
+                                serviceTypeDropdown.empty();
+                    
+                                if (selectedService === 'haircut') {
+                                    var option = $('<option>', {value: 'layer-cut', text: 'Layer Cut'});
+                                    serviceTypeDropdown.append(option);
+                    
+                                    option = $('<option>', {value: 'u/v-cut', text: 'U/V Cut'});
+                                    serviceTypeDropdown.append(option);
+                    
+                                    option = $('<option>', {value: 'normal-cut', text: 'Normal Cut'});
+                                    serviceTypeDropdown.append(option);
+                                }
+                                else if (selectedService === 'wax') {
+                                    var option = $('<option>', {value: 'underarms', text: 'Underarms'});
+                                    serviceTypeDropdown.append(option);
+                    
+                                    option = $('<option>', {value: 'legs', text: 'Legs'});
+                                    serviceTypeDropdown.append(option);
+                    
+                                    option = $('<option>', {value: 'hands', text: 'Hands'});
+                                    serviceTypeDropdown.append(option);
+                    
+                                    option = $('<option>', {value: 'complete-body', text: 'Complete Body'});
+                                    serviceTypeDropdown.append(option);
+                                }
+                                else if (selectedService === 'facial') {
+                                    var option = $('<option>', {value: 'Clean up', text: 'Clean Up'});
+                                    serviceTypeDropdown.append(option);
+                    
+                                    option = $('<option>', {value: 'Golden', text: 'Golden'});
+                                    serviceTypeDropdown.append(option);
+                    
+                                    option = $('<option>', {value: 'platinum', text: 'Platinum'});
+                                    serviceTypeDropdown.append(option);
+            
+                                    option = $('<option>', {value: 'Fruit', text: 'Fruit'});
+                                    serviceTypeDropdown.append(option);
+                                }
+                                
+                                else if (selectedService === 'make up') {
+                                    var option = $('<option>', {value: 'make up', text: 'No options'});
+                                    serviceTypeDropdown.append(option);
+                    
+                                    
+                                }
+                               
+                                else if (selectedService === 'manicure') {
+                                    var option = $('<option>', {value: 'manicure', text: 'No options'});
+                                    serviceTypeDropdown.append(option);
+                                }
+            
+                                else if (selectedService === 'pedicure') {
+                                    var option = $('<option>', {value: 'pedicure', text: 'No option'});
+                                    serviceTypeDropdown.append(option);
+                                }
+                                                    
+                                else if (selectedService === 'Hair') {
+                                    var option = $('<option>', {value: 'smooth', text: 'Smoothening'});
+                                    serviceTypeDropdown.append(option);
+                    
+                                    option = $('<option>', {value: 'straight', text: 'Straightening'});
+                                    serviceTypeDropdown.append(option);
+                    
+                                    option = $('<option>', {value: 'keratin', text: 'Keratin'});
+                                    serviceTypeDropdown.append(option);
+            
+                                    option = $('<option>', {value: 'Blow dry', text: 'Blow Dry'});
+                                    serviceTypeDropdown.append(option);
+                                }
+                                else if (selectedService === 'spa') {
+                                    var option = $('<option>', {value: 'hairSpa', text: 'Hair spa'});
+                                    serviceTypeDropdown.append(option);
+                            
+                                    option = $('<option>', {value: 'BodySpa', text: 'Body Spa'});
+                                    serviceTypeDropdown.append(option);
+                                }
+                    
+                                
+                            });
+                        });
+                    </script>
+                    
+                
+            </div>
+           
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+   
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'adminindex.html' %}
+
+{% block content %}
+<div class="container">
+  {% for i in data %}
+  <form action="{% url 'update' id=i.id %}" method="post" style="text-align:center;" enctype="multipart/form-data">
+      {% csrf_token %}
+<div class="row">
+    <div class="col-lg-12 mb-4">
+      <!-- Simple Tables -->
+      <div class="card">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6 class="m-0 font-weight-bold text-primary">Branches</h6>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <label for="exampleFormControlInput1" style="text-align:center;"><h2>Branch name</h2></label>
+          <input type="text" name="branchname" value="{{i.branchname}}"class="form-control" id="exampleFormControlInput1" placeholder="text">
+          <label style="text-align:center;">Description</label>
+          <input type="text" name="description" value="{{i.description}}"><br>
+        <div class="form-group">
+          <input type="file" name="image">
+   </div>
+  <br>
+  <button style="text-align:center;">Submit</button>    
+</form> 
+{% endfor %}
+</div>
+        
+        </thead>
+            <tbody>
+              
+        </div>
+        <div class="card-footer"></div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+
+
+
